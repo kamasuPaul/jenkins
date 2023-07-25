@@ -1,0 +1,25 @@
+pipeline{
+   agent: agent1
+   stages {
+        stage('Build'){
+            steps {
+                sh 'make'
+                archiveArtifacts: '**/target/*.jar', fingerprint: true
+            }
+        }
+        stage('Test'){
+            bat 'make check || true'
+            junit '**/target/*.xml'
+        }
+        stage('Deploy'){
+            when{
+                expression {
+                    currentBuild.result == null || currentBuild.result == 'SUCCESS'
+                }
+            }
+            steps {
+                sh 'make publish'
+            }
+        }
+   }
+}
