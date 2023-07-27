@@ -7,5 +7,12 @@ pipeline {
       }
     }
 
+    stage('') {
+      agent any
+      steps {
+        echo 'Its working'
+      }
+    }
+
   }
 }
