@@ -7,10 +7,17 @@ pipeline {
       }
     }
 
-    stage('') {
+    stage('error') {
       agent any
       steps {
         echo 'Its working'
+      }
+    }
+
+    stage('Sleep') {
+      steps {
+        sleep 5
+        echo 'Sucess'
       }
     }
 
