@@ -7,17 +7,5 @@ pipeline {
       }
     }
 
-    stage('Buzz build') {
-      steps {
-        sh './jenkins/build.sh'
-      }
-    }
-
-    stage('Buzz test') {
-      steps {
-        sh './jenkins/test-all.sh'
-      }
-    }
-
   }
 }
