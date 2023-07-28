@@ -1,5 +1,10 @@
 pipeline {
-  agent any
+  agent {
+    node {
+      label 'agent1'
+    }
+
+  }
   stages {
     stage('Buzz') {
       steps {
@@ -7,17 +12,15 @@ pipeline {
       }
     }
 
-    stage('error') {
-      agent any
+    stage('Buzz build') {
       steps {
-        echo 'Its working'
+        sh './jenkins/build.sh'
       }
     }
 
-    stage('Sleep') {
+    stage('Buzz test') {
       steps {
-        sleep 5
-        echo 'Sucess'
+        sh './jenkins/test-all.sh'
       }
     }
 
