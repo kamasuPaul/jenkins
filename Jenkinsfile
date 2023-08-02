@@ -14,21 +14,23 @@ pipeline {
       }
     }
 
-    stage('Sleep') {
+    stage('Ask for input') {
       steps {
-        sleep 5
-        echo 'Sucess'
+        input(message: 'Hello, Please confirm the deployment?', id: 'confirm')
+      }
+    }
+
+    stage('Deployment') {
+      steps {
+        echo 'Deployment success'
       }
     }
 
   }
-  post{
-    always{
-      mail(
-        to: 'kamasupaul@sybyl.com', //TODO: add this to env
-        subject: "Finished run for build ${env.BUILD_ID}, commit ${env.GIT_BRANCH} (${env.GIT_COMMIT.substring(0,6)})",
-        body:'Placheholder'
-      )
+  post {
+    always {
+      mail(to: 'kamasupaul@sybyl.com', subject: "Finished run for build ${env.BUILD_ID}, commit ${env.GIT_BRANCH} (${env.GIT_COMMIT.substring(0,6)})", body: 'Placheholder')
     }
+
   }
 }
